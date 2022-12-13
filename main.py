@@ -15,6 +15,9 @@ prepared_answers  = [
 
 class MyClient(discord.Client):
     async def on_message(self, message):
+        if message.channel.name != channel_name:
+            return 
+        
         # Bot's messages ignoring
         if message.author == client.user:
             return
@@ -48,6 +51,7 @@ class MyClient(discord.Client):
 if __name__ == "__main__":
     load_dotenv()
     discord_token = os.getenv("discord")
+    channel_name = os.getenv("channel")
     intents = discord.Intents.default()
     intents.message_content = True
     client = MyClient(intents=intents)
